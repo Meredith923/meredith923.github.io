@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Tag: web | Meredith923</title>
+  <title itemprop="name">第三章总结：函数 | Meredith923</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -342,64 +342,217 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="web.img" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      第三章总结：函数</h1>
+      <p class="entry-census">
+        <span>
+          <a href="">
+            <img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/2-1.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="">Meredith923</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2019-11-30<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
   </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">web</h1>
-  </header>
-</div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2018/12/12/Hexo-Theme-Sakura/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <p>#一、为什么要使用函数？</p>
+<p>####1. 简化代码，增强程序的可读性。<br>把一些计算或操作编成通用的函数，以供随时调用，从而避免了代码的重复冗长；简化代码量，对各个部分进行封装，使问题变得简单而且直观，提高了程序的易读性。</p>
+<p>####2.提升程序的可维护性。<br>如果我们把主程序拆分成许多个步骤，为每一个功能编写一个函数，那么根据函数的函数名每个函数的功能就非常清晰了。如果我们要修改某一个函数的功能，其他的函数也丝毫不会受到影响。</p>
+<p>####3.提高团队的开发效率。<br>设计一个规模很大的程序，它有几千项功能，若把他们都放在一个主函数里，就只能由一个人来编写。但如果我们把这几千项功能分拆为一些函数，分给几百个人去编写，最后用主函数把这些完成的函数组织一下，一个程序就可以很快完工。</p>
+<p>####4.降低程序执行效率。【缺点】<br>在程序中运用函数，就需要传递参数，开辟缓存、堆栈等，相比较而言，这个歌过程会耗一些多余的效率。</p>
+<p>#二、为什么要用函数重载？</p>
+<p>###【定义】两个以上的函数，具有相同的函数名，但是形参的个数或者类型不同，编译器根据形参和实参的类型和个数的最佳匹配，自动确定调用哪一个函数，称作函数的重载。</p>
+<ul>
+<li>重载函数的形参必须不同（形参个数不同或者类型不同）</li>
+<li>与返回值的类型无关<br>###【使用函数重载的好处】<br>重载函数通常用来命名一组功能相似的函数，这样做减少了函数名的数量，避免了名字空间的污染，对于程序的可读性有很大的好处。当函数的编写者充分考虑了不同情况下应该运行稍有不同的函数，函数的使用者就不必为这些小细节而烦恼了。<br>###【注意】当使用具有默认形参值的函数重载形式时，需要注意防止二义性<pre><code>
+void fun(int length,int weight = 2,int height = 33);   //由于weight和height具有默认初始值，只需要一个参数length即可调用函数
+void fun(int length);   //只需要参数length即可调用函数
+/*此时，对于语句fun（1），编译器会指出语法错误*/
+</code></pre>
+
+</li>
+</ul>
+<p>#三、值传递 VS 地址传递 VS 引用传递</p>
+<p>##1.值传递<br>形参是实参的拷贝，改变形参的值并不会影响外部实参的值。从被调用函数的角度来说，值传递是单向的（实参-&gt;形参），参数的值只能传入，不能传出。当函数内部需要修改参数，并且不希望这个改变影响调用者时，采用值传递。</p>
+<p><code>    int fun（int x）；</code></p>
+<p>##2.地址传递<br>形参为指向实参地址的指针，当对形参的指向操作时，就相当于对实参本身进行的操作</p>
+<p><code>    int fun（int *x）；</code></p>
+<p>##3.引用传递<br>形参相当于是实参的“别名”，对形参的操作其实就是对实参的操作，在引用传递过程中，被调函数的形式参数虽然也作为局部变量在栈中开辟了内存空间，但是这时存放的是由主调函数放进来的实参变量的地址。被调函数对形参的任何操作都被处理成间接寻址，即通过栈中存放的地址访问主调函数中的实参变量。正因为如此，被调函数对形参做的任何操作都影响了主调函数中的实参变量。</p>
+<p><code>    int fun（int &amp;x）；</code></p>
+<p>##4.三种传递方式的比较</p>
+<p>###【代码】分析三种传值方式函数操作地址的不同</p>
+<p><pre><code></code></pre></p>
+<p>#include &lt; iostream &gt;</p>
+<p>using namespace std;</p>
+<p>//值传递<br>void change1(int n) {<br>    cout &lt;&lt; “值传递–函数操作地址” &lt;&lt; &amp;n &lt;&lt; endl;     //显示的是拷贝的地址而不是源地址<br>    n++;<br>}</p>
+<p>//引用传递<br>void change2(int&amp; n) {<br>    cout &lt;&lt; “引用传递–函数操作地址” &lt;&lt; &amp;n &lt;&lt; endl;  //显示的是源地址（即引用为别名）<br>    n++;<br>}<br>//指针传递<br>void change3(int<em> n) {<br>    cout &lt;&lt; “指针传递–函数操作地址 “ &lt;&lt; n &lt;&lt; endl;   //显示的是源地址
+    </em>n = *n + 1;<br>}<br>int main() {<br>    int n = 10;<br>    cout &lt;&lt; “ n的地址” &lt;&lt; &amp;n &lt;&lt; endl&lt;&lt; endl;<br>    change1(n);<br>    cout &lt;&lt; “值传递结果   n=” &lt;&lt; n &lt;&lt; endl&lt;&lt; endl;<br>    change2(n);<br>    cout &lt;&lt; “引用传递结果 n=” &lt;&lt; n &lt;&lt; endl&lt;&lt; endl;<br>    change3(&amp;n);<br>    cout &lt;&lt; “地址传递结果 n=” &lt;&lt; n &lt;&lt; endl&lt;&lt; endl;<br>    return true;<br>}<br></p>
+<p>###【结论】</p>
+<ul>
+<li>当函数内部需要修改参数，并且不希望这个改变影响调用者时，采用值传递。</li>
+<li>当函数内部需要修改参数并且希望改动影响调用者时，采用引用传递或者地址传递。</li>
+<li>当一个函数实际需要返回多个值，而只能显式返回一个值时，可以将另外需要返回的变量以地址或者引用传递<br>给函数，这样在函数内部修改并且返回后，调用者可以拿到被修改过后的变量，也相当于一个隐式的返回值传递。<br>#<br>#四、递归函数<br>###【定义】一种可以直接或间接调用自身的函数（自己调用自己）</li>
+<li>递归的边界</li>
+<li>递归的逻辑–公式</li>
+</ul>
+<p>##【例1】阶乘</p>
+<p>###【分析】阶乘的递归公式为</p>
+<p>###【代码】</p>
+<p><pre><code>#include&lt; iostream &gt;<br>using namespace std;<br>int F(int n){<br>    if(n==0)//递归边界<br>        return 1;<br>    return n*F(n-1);//递归公式<br>} </code></pre></p>
+<p>int main(){<br>    int n;<br>    cin &gt;&gt; n;<br>    cout &lt;&lt; F(n) &lt;&lt; endl;<br>    return 0;<br>}<br></p>
+<p>##【例2】汉诺塔</p>
+<p>###【分析】<br>    1）n == 1<br>       　　　　　　第1次  1号盘  A—-&gt;C       sum = 1 次<br>    2) n == 2<br>       　　　　　　第1次  1号盘  A—-&gt;B<br>      　　　　　　 第2次  2号盘  A—-&gt;C<br>       　　　　　　第3次  1号盘  B—-&gt;C        sum = 3 次<br>    3）n == 3<br>                第1次  1号盘  A—-&gt;C<br>                第2次  2号盘  A—-&gt;B<br>                第3次  1号盘  C—-&gt;B<br>                第4次  3号盘  A—-&gt;C<br>                第5次  1号盘  B—-&gt;A<br>                第6次  2号盘  B—-&gt;C<br>                第7次  1号盘  A—-&gt;C        sum = 7 次</p>
+<ul>
+<li>假设A为存放盘子的塔，B为目标塔，C为辅助塔，算法分为三步： </li>
+<li>step1：将A上n-1个盘子全部放到C塔上 </li>
+<li>step2：将A上剩下的一个盘子放到B塔上 </li>
+<li>step3：将C塔上的盘子全部放到B塔上</li>
+</ul>
+<p>###【代码】</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+
+void move(char src, char dest) {   //移动函数
+    cout &lt;&lt; src &lt;&lt; &quot;--&gt;&quot; &lt;&lt; dest &lt;&lt; endl;
+}
+
+void hanoi(int n, char src, char mid, char dest) {
+    if (n == 1) move(src, dest);
+    else {
+        hanoi(n - 1, src, dest, mid);  //把上面的n-1个移动到备用柱子
+        move(src, dest);    //把第n个移动到目标柱子
+        hanoi(n - 1, mid, src, dest);   //把备用柱子上的n-1个移动到目标柱子
+    }
+}
+
+int main() {
+    int m;
+    cout &lt;&lt; &quot;enter the num:&quot;;  //输入环个数
+    cin &gt;&gt; m;
+    hanoi(m, &#39;A&#39;, &#39;B&#39;, &#39;C&#39;);
+    return 0; 
+}
+</code></pre>
         </div>
-        <img width="150" height="150" src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2018/12/12/Hexo-Theme-Sakura/">
-    Hexo-Theme-Sakura</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2018-12-12</div>
-    <p>
-    hexo-sakura主题使用教程</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2018/12/12/Hexo-Theme-Sakura/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/custom/donate/wx.png"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/custom/donate/wx.png"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2019/12/01/第五章笔记-静态数据成员和静态成员函数 /" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                第五章总结：静态数据成员和静态成员函数</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2019/11/29/枚举类型/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                第二章：枚举类型</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "ncNSiKFtNPOPE1WpD0W6lT6n-gzGzoHsz",
+        appKey: "JyFaNO8s1XJLTcJovqoS3yDI",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!--  -->
-    
-  </div>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/2-1.jpg" itemprop="image" alt="Meredith923" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author">Meredith923</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>

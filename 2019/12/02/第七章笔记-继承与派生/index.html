@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Tag: web | Meredith923</title>
+  <title itemprop="name">第七章总结：继承与派生 | Meredith923</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -342,64 +342,366 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="web.img" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      第七章总结：继承与派生</h1>
+      <p class="entry-census">
+        <span>
+          <a href="">
+            <img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/2-1.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="">Meredith923</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2019-12-2<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
   </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">web</h1>
-  </header>
-</div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2018/12/12/Hexo-Theme-Sakura/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <p>#继承与派生———第七章总结作业</p>
+<p>#一、继承和派生的相关基本概念</p>
+<ul>
+<li><font color="red">[类的继承]</font>：新的类从已有的类得到已有的属性的过程</li>
+<li><font color="red">[类的派生]</font>：从已有类产生新类的过程</li>
+<li>原有的类称为[基类]或[父类]，新的类称为[派生类]或[子类]</li>
+<li>[多继承]：一个类可以有多个继承，反之只有一个继承的称为[单继承]  <pre><code>
+//单继承
+class 派生类名:继承方式 基类名{
+成员声明;
+}
+//多继承
+class 派生类名:继承方式1 基类名,继承方式2 基类名...{
+成员声明;
+}
+</code></pre></li>
+<li>在类族中，直接参与派生出某类的基类称为[直接基类]；基类的基类甚至更高层的基类称为[间接基类]</li>
+<li>继承与派生是为了提高代码的<font color="red">重用性</font>和<font color="red">可扩充性</font>。【好处】</li>
+<li>通过<font color="red">继承</font>实现设计与代码的重用，通过<font color="red">派生</font>实现当新问题出现并且不能用原有设计解决时进行对原有类的改造【目的】</li>
+<li>派生类的生成过程：<br>1.吸收基类成员——吸收<font color="red">除去构造函数和析构函数</font>之外的所有成员<br>2.改造基类成员——如果派生类声明了一个和某些基类成员同名的新成员，派生类就会隐藏外层同名成员，这被称为[同名隐藏]<br>3.添加新成员</li>
+<li><font color="red">[公有继承]</font>：基类的公有成员public和保护类成员protected的访问属性在派生类中<font color="red">不变</font>，而基类的私有成员private不可以直接访问</li>
+<li><font color="red">[私有继承]</font>：基类的公有成员public和保护类成员protected在派生类中<font color="red">以私有成员身份</font>出现，而基类的私有成员private不可以直接访问（即都作为派生类的私有成员）</li>
+<li><font color="red">[保护继承]</font>：基类的公有成员public和保护成员protected都<font color="red">以保护类成员身份</font>出现在派生类中，基类私有成员private不可以直接访问  </li>
+</ul>
+<p>#二、3种继承方式的比较（public,private,protected）</p>
+<p>##【公有继承】【7-1】</p>
+<p>###代码<br>    //从基类继承的public、protected类型都可使用，private不能使用</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+
+class Point {
+public:
+    void initPoint(float x = 0, float y = 0) {
+        this-&gt;x = x;
+        this-&gt;y = y;
+    }
+    void move(float offX, float offY) {
+        x += offX;
+        y += offY;
+    }
+    float getX() const{ return x; }
+    float getY() const{ return y; }
+private:
+    float x, y;
+};
+
+class Rectangle:public Point {
+public:
+    void initRectangle(float x, float y, float w, float h) {
+    initPoint(x, y);         //调用基类公有数据成员
+    this-&gt;h = h;
+    this-&gt;w = w;
+}
+float getW() const { return w; }
+float getH() const { return h; }
+
+private:                           //新增私有数据成员
+    float w, h;
+};
+
+int main() {
+    Rectangle rect;
+    rect.initRectangle(2, 3, 20, 10);
+    rect.move(3, 2);
+    cout &lt;&lt; &quot;The data of rect(x,y,w,h):&quot; &lt;&lt; endl;
+    cout &lt;&lt; rect.getX() &lt;&lt; &quot;,&quot;
+        &lt;&lt; rect.getY() &lt;&lt; &quot;,&quot;
+        &lt;&lt; rect.getW() &lt;&lt; &quot;,&quot;
+        &lt;&lt; rect.getH() &lt;&lt; endl;
+    return 0;
+}  
+</code></pre><p>###运行截图</p>
+<p>##【私有继承】【7-2】</p>
+<p>###代码<br>    /<em>7-2</em>//<em>私有继承</em>/</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+
+class Point {
+public:
+    void initPoint(float x = 0, float y = 0) {
+        this-&gt;x = x;
+        this-&gt;y = y;
+    }
+    void move(float offX, float offY) {
+        x += offX;
+        y += offY;
+    }
+    float getX() const{ return x; }
+    float getY() const{ return y; }
+private:
+    float x, y;
+};
+
+class Rectangle:private Point {    //*****************
+public:
+    void initRectangle(float x, float y, float w, float h) {
+        initPoint(x, y);         //调用基类公有数据成员
+        this-&gt;h = h;
+        this-&gt;w = w;
+    }
+    void move(float offX, float offY) {
+        Point::move(offX, offY);   //***********************
+    }
+    float getX() const { return Point::getX(); }   //********************
+    float getY() const { return Point::getY(); }   //********************
+    float getW() const { return w; }
+    float getH() const { return h; }
+
+private:                           //新增私有数据成员
+    float w, h;
+};
+
+int main() {
+    Rectangle rect;
+    rect.initRectangle(0, 0, 20, 10);
+    rect.move(3, 2);
+    cout &lt;&lt; &quot;The data of rect(x,y,w,h):&quot; &lt;&lt; endl;
+    cout &lt;&lt; rect.getX() &lt;&lt; &quot;,&quot;
+        &lt;&lt; rect.getY() &lt;&lt; &quot;,&quot;
+        &lt;&lt; rect.getW() &lt;&lt; &quot;,&quot;
+        &lt;&lt; rect.getH() &lt;&lt; endl;
+    return 0;
+}
+</code></pre><p>###运行截图  </p>
+<p>##【保护继承】【7-3】</p>
+<ul>
+<li>基类的公有成员和保护成员都以保护类成员身份出现在派生类中，基类私有成员不可以直接访问</li>
+<li><font color="red">派生类的其他成员可以直接访问从基类继承来的公有成员和保护成员，但在类的外部通过派生类的对象无法直接访问他们</font></li>
+<li><p>如果B是A的派生类，B的成员函数<font color="red">只能通过B的对象</font>访问A中定义的protected成员，而<font color="red">不能通过A的对象</font>访问A中的protected对象<br>###代码<br>  #include<iostream><br>  #include&lt;assert.h&gt;<br>  using namespace std;<br>  class A {<br>  public:</iostream></p>
+<pre><code>  int a;
+  A() {
+      a1 = 1;
+      a2 = 2;
+      a3 = 3;
+      a = 4;
+  }
+  void fun() {
+      cout &lt;&lt; a &lt;&lt; endl;    //正确
+      cout &lt;&lt; a1 &lt;&lt; endl;   //正确
+      cout &lt;&lt; a2 &lt;&lt; endl;   //正确
+      cout &lt;&lt; a3 &lt;&lt; endl;   //正确
+  }
+</code></pre><p>  public:</p>
+<pre><code>  int a1;
+</code></pre><p>  protected:</p>
+<pre><code>  int a2;
+</code></pre><p>  private:</p>
+<pre><code>  int a3;
+</code></pre><p>  };<br>  class B : protected A {<br>  public:</p>
+<pre><code>  int a;
+  B(int i) {
+      A();
+      a = i;
+  }
+  void fun() {
+      cout &lt;&lt; a &lt;&lt; endl;       //正确，public成员。
+      cout &lt;&lt; a1 &lt;&lt; endl;       //正确，基类的public成员，在派生类中变成了protected，可以被派生类访问。
+      cout &lt;&lt; a2 &lt;&lt; endl;       //正确，基类的protected成员，在派生类中还是protected，可以被派生类访问。
+      cout &lt;&lt; a3 &lt;&lt; endl;       //错误，基类的private成员不能被派生类访问。
+  }
+</code></pre><p>  };</p>
+<p>  int main() {</p>
+<pre><code>  B b(10);
+  cout &lt;&lt; b.a &lt;&lt; endl;       //正确。public成员
+  cout &lt;&lt; b.a1 &lt;&lt; endl;      //错误，protected成员不    能在类外访问。
+  cout &lt;&lt; b.a2 &lt;&lt; endl;      //错误，protected成员不能在类外访问。
+  cout &lt;&lt; b.a3 &lt;&lt; endl;      //错误，private成员不能在类外访问。
+  system(&quot;pause&quot;);
+  return 0;
+</code></pre><p>  }  </p>
+</li>
+</ul>
+<p>###运行截图  </p>
+<p>#三、派生类的构造函数执行顺序浅析</p>
+<p>##【构造函数】</p>
+<ul>
+<li>构造派生类对象时，需要对<font color="red">基类的成员对象</font>和<font color="red">新增成员对象</font>进行<font color="red">初始化</font></li>
+<li>一般语法为：  <pre>
+  派生类名::派生类名(参数表):基类名1(基类1初始化列表),...,基类n(基类n初始化列表),成员对象1(成员对象1初始化列表)...
+  {
+      派生类构造函数的其他初始化操作;
+  }
+</pre>  </li>
+<li>如果对基类进行初始化时，需要调用基类的带有形参表的构造函数时，<font color="red">必须</font>声明构造函数</li>
+<li>派生类构造函数执行的一般次序<br>1.调用基类构造函数<br>2.对派生类新增的成员对象初始化，调用顺序按照它们在类中的声明顺序<br>3.执行派生类的构造函数内容  </li>
+</ul>
+<p>###代码<br>    //7-4  派生类构造函数，多继承，含有内嵌对象</p>
+<pre><code>#include&lt;iostream&gt;
+using namespace std;
+
+class B1 {                 //基类B1，构造函数有参数
+public:
+    B1(int i) {
+        cout &lt;&lt; &quot;构造函数B1&quot; &lt;&lt; i &lt;&lt; endl;
+    }    
+};
+class B2 {  //基类B2，构造函数有参数
+public:
+    B2(int j) {
+        cout &lt;&lt; &quot;构造函数B2&quot; &lt;&lt; j &lt;&lt; endl;
+    }
+};
+class B3 {                //基类B3，构造函数无参数
+public:
+    B3() {
+        cout &lt;&lt; &quot;构造函数B3*&quot; &lt;&lt; endl;
+    }
+};
+
+class Derived :public B2, public B1, public B3 {
+    //声明派生类，顺序为B2,B1,B3
+public:
+    Derived(int a,int b,int c,int d):B1(a),menber2(d),menber1(c),B2(b){}
+    //注意类名的个数与顺序，注意成员对象名的个数与顺序
+private:
+    B1 menber1;
+    B2 menber2;
+    B3 menber3;
+};
+
+int main() {
+    Derived obj(1, 2, 3, 4);
+    return 0;
+}
+</code></pre><p>###运行截图</p>
+<p>###代码解析<br>1.关于Derived类构造函数的执行情况：先调用基类的构造函数，然后调用内嵌对象的构造函数，又因基类的调用顺序按照派生类的定义顺序，所以先B2，再是B1最后B3，而内嵌对象的调用顺序是按照成员在类中声明的顺序，所以先B1，后B2、B3<br>2.因为B3的构造函数没有参数，所以基类B3和基类B3的类成员对象menber3就不必列出</p>
+
         </div>
-        <img width="150" height="150" src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2018/12/12/Hexo-Theme-Sakura/">
-    Hexo-Theme-Sakura</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2018-12-12</div>
-    <p>
-    hexo-sakura主题使用教程</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2018/12/12/Hexo-Theme-Sakura/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/custom/donate/wx.png"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/custom/donate/wx.png"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2019/12/05/第八章笔记-多态/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                第八章总结：多态性</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2019/12/01/第五章笔记-静态数据成员和静态成员函数 /" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                第五章总结：静态数据成员和静态成员函数</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "ncNSiKFtNPOPE1WpD0W6lT6n-gzGzoHsz",
+        appKey: "JyFaNO8s1XJLTcJovqoS3yDI",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!--  -->
-    
-  </div>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/2-1.jpg" itemprop="image" alt="Meredith923" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author">Meredith923</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
