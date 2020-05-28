@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <title itemprop="name">第八章总结：多态性 | Meredith923</title>
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/lib.min.css" media="all">
+  <link rel="stylesheet" href="/css/font.css" media="all">
+  <link rel="stylesheet" href="/css/insight.css" media="all">
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+  <link rel="stylesheet" href="/css/zoom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+  <script>
+  /*Initial Variables*/
+  var mashiro_option = new Object();
+  var mashiro_global = new Object();
+  mashiro_option.NProgressON = true;
+  /* 
+   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+   */
+  mashiro_option.email_domain = "";
+  mashiro_option.email_name = "";
+  mashiro_option.cookie_version_control = "";
+  mashiro_option.qzone_autocomplete = false;
+  mashiro_option.site_name = "苒耀晨Meredith923";
+  mashiro_option.author_name = "Meredith923";
+  mashiro_option.site_url = "https://sakura.hojun.cn";
+  mashiro_option.v_appId = "ncNSiKFtNPOPE1WpD0W6lT6n-gzGzoHsz";
+  mashiro_option.v_appKey = "JyFaNO8s1XJLTcJovqoS3yDI";
+  mashiro_option.mathjax = "0";
+  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
+  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+  // mashiro_option.float_player_on = true;
+
+  /*End of Initial Variables*/
+  </script>
+  <script type="text/javascript">
+  var bg = "https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/cover/1.jpg,https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/cover/2.jpg,https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/cover/3.jpg,https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/cover/4.jpg,https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/cover/5.jpg,https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/cover/6.jpg,https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/cover/7.png,https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/cover/(6).jpg.webp".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+</head>
+</html>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="https://sakura.hojun.cn">
+          <img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/2-1.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>Live your life with passion! With some drive!</p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
+          </li>
+          
+            
+              
+                <li>
+                  <a href="http://github.com/Meredith923" target="_blank" class="social-github" title="github">
+                    <img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/social/github.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="https://weibo.com/u/5222023671" target="_blank" class="social-github" title="sina">
+                    <img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/social/sina.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="http://music.163.com/m/user/home?id=476384133" target="_blank" class="social-github" title="wangyiyun">
+                    <img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/social/wangyiyun.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="https://www.zhihu.com/people/d96b66933a2d11c46c0a9b042f265ce7" target="_blank" class="social-github" title="zhihu">
+                    <img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/social/zhihu.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="http://weibo.com/mashirozx?is_all=1" target="_blank" class="social-github" title="email">
+                    <img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/social/email.svg">
+                  </a>
+                </li>
+              
+            
+          
+          <li id="bg-next">
+            <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
+          </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">苒耀晨</span>
+            <span class="shironeko">Meredith923</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/技术/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/生活/">
+                          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                          生活
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/资源/">
+                          <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                          资源
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/随想/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/转载/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/tags/悦读/">
+                          <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                          书单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/bangumi/">
+                          <i class="fa fa-film faa-vertical" aria-hidden="true"></i>
+                          片单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/tags/图集/">
+                          <i class="fa fa-photo" aria-hidden="true"></i>
+                          图集
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+                    关于
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/about/">
+                          <i class="fa fa-meetup" aria-hidden="true"></i>
+                          我？
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/theme-sakura/">
+                          <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                          主题
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/lab/">
+                          <i class="fa fa-cogs" aria-hidden="true"></i>
+                          Lab
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      第八章总结：多态性</h1>
+      <p class="entry-census">
+        <span>
+          <a href="">
+            <img src="">
+          </a>
+        </span>
+        <span>
+          <a href="">Meredith923</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2019-11-29<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <p>#第八章 多态性</p>
+<p>#一、多态性的各种概念</p>
+<ul>
+<li>多态的定义：同样的消息被不同类型的对象接收时导致不同的行为</li>
+<li>多态的类型：重载多态、强制多态、包含多态和参数多态。前两种为专用多态，后两种为通用多态。</li>
+<li>[强制多态]：将一个变元的类型加以变化，以符合一个函数或者操作的要求。（例如：加法运算符在进行浮点数与整型数相加时，首先进行强制转换，把整型数先变为浮点型数再相加的情况）</li>
+<li>[多态的实现]：编译时的多态性（在编译过程中确定了同名操作的具体操作对象）和运行时的多态（在程序运行过程中才动态的确定操作所针对的具体对象）</li>
+<li><font color="red">[绑定]：指计算机程序自身彼此关联的过程，就是把一个标识符名和一个地址绑定的过程</font></li>
+<li><font color="red">[静态绑定]</font>：绑定工作在编译阶段完成的情况。</li>
+<li><font color="red">[动态绑定]</font>：绑定在程序运行阶段完成的情况。</li>
+<li>[运算符重载]：对已有的运算符赋予多重含义，使同一个运算符作用于不同类型的数据时导致的不同行为。</li>
+</ul>
+<p>#二、运算符的重载实验</p>
+<p>##1.成员函数形式的重载</p>
+<p>###【复数的加减法】</p>
+<p><pre><code>/<em>例题8-1</em>//<em>复数的加减法</em>/</code></pre></p>
+<p>#include<iostream><br>using namespace std;</iostream></p>
+<p>class complex {<br>private:<br>    double real;      //负数实部<br>    double imag;      //实数虚部<br>public:<br>    complex(double r = 0.0, double i = 0.0) :real(r), imag(i) {}<br>    complex operator +(const complex&amp; c2) const;<br>    complex operator -(const complex&amp; c2) const;<br>    void display() const {<br>        cout &lt;&lt; “(“ &lt;&lt; real &lt;&lt; “,” &lt;&lt; imag &lt;&lt; “)” &lt;&lt; endl;<br>    }<br>};</p>
+<p>complex complex ::operator +(const complex&amp; c2) const {<br>    return complex(real + c2.real, imag + c2.imag);<br>}</p>
+<p>complex complex ::operator -(const complex&amp; c2) const {<br>    return complex(real - c2.real, imag - c2.imag);<br>}</p>
+<p>int main() {<br>    complex c1(5, 4), c2(2, 10), c3;<br>    cout &lt;&lt; “c1=”; c1.display();<br>    cout &lt;&lt; “c2=”; c2.display();<br>    c3 = c2 - c1;<br>    cout &lt;&lt; “c3=c2-c1=”; c3.display();<br>    c3 = c2 + c1;<br>    cout &lt;&lt; “c3=c2+c1=”; c3.display(); </p>
+<p>}<br></p>
+<p>###运行截图：</p>
+<p>##2.非成员函数形式的重载（借助friend）</p>
+<p>###【前置++和后置++的重载】</p>
+<p><pre><code>#include<iostream><br>using namespace std;</iostream></code></pre></p>
+<p>class Point {<br>private:<br>    float x, y;<br>public:<br>    Point(float x, float y) {<br>        this-&gt;x = x;<br>        this-&gt;y = y;<br>    }<br>    void show() {<br>        cout &lt;&lt; “point=(“ &lt;&lt; x &lt;&lt; “,” &lt;&lt; y &lt;&lt; “)” &lt;&lt; endl;<br>    }<br>    friend Point operator ++(Point p);    //前置++<br>    friend Point operator ++(Point &amp;p,int);  //后置++<br>};</p>
+<p>Point operator++(Point p) {<br>    p.x++;<br>    p.y++;<br>    return p;<br>}</p>
+<p>Point operator++(Point &amp;p,int) {<br>    Point old = p;<br>    p.x++;<br>    p.y++;<br>    return old;<br>}</p>
+<p>int main() {<br>    Point p(2, 1.5);<br>    Point* pt = &p;<br>    p.show();<br>    cout &lt;&lt; “run p++:  “;<br>    (p++).show();<br>    cout &lt;&lt; “run ++p:  “;<br>    (++p).show();<br>    return 0;<br>}</p>
+<p>###运行截图：</p>
+<p>###【将==重载为判断两个字符串相等】</p>
+<p><pre><code>/<em>附加题</em>//<em>重载 ==，判断两个字符串是否相等</em>/</code></pre></p>
+<p>#include<iostream></iostream></p>
+<p>#include<cstdlib></cstdlib></p>
+<p>#include<cassert><br>using namespace std;<br>class My_string{<br>public:<br>    char<em> ch;<br>    My_string(char </em>ch):ch(ch){}     //构造函数<br>    int operator ==(My_string s2)const;   //重载 ==<br>};<br>int My_string::operator==(My_string s2)const {<br>    if (strcmp(ch, s2.ch) == 0)return 1;<br>    else return 0;<br>}<br>int main() {</cassert></p>
+<pre><code>char *op1=new char[100], *op2=new char[100];
+cout &lt;&lt; &quot;输入两个字符串：&quot;;
+cin &gt;&gt;op1&gt;&gt;op2;
+assert(strlen(op1) &lt;= 100 &amp;&amp; strlen(op2) &lt;= 100);   //防止字符数组越界
+My_string a(op1);
+My_string b(op2);
+if (a.operator==(b)) {
+    cout &lt;&lt; &quot;两字符串相等&quot; &lt;&lt; endl;
+}
+else cout &lt;&lt; &quot;两字符串不等&quot; &lt;&lt; endl;
+delete[] op1;     //删除字符串
+delete[] op2;
+return 0;
+</code></pre><p>}<br></p>
+<p>###运行截图：</p>
+<p>#三、虚函数的各种概念及实验验证</p>
+<p>##1.相关概念</p>
+<ul>
+<li>[一般虚函数的声明语法]：<pre><code>vitual 函数类型 函数名 (形参表);</code></pre></li>
+<li><font color="red">虚函数声明只能出现在类定义中的函数原型声明中，而不能在成员函数实现的时候。</font></li>
+<li>[运行过程中多态需要满足的条件]：<br>①满足赋值兼容原则<br>②声明虚函数<br>③由成员函数来调用或者是通过指针、引用来访问虚函数</li>
+<li>[判断派生类的成员是不是虚函数]:<br>①该函数是否与基类虚函数有相同的姓名字<br>②该函数是否与基类的虚函数有相同的参数个数及相同的对应参数类型<br>③该函数是否与基类的虚函数有相同的返回值或者满足赋值兼容性规则的指针、引用类型的返回值</li>
+<li><font color="red">只有通过基类的指针或者引用调用虚函数时，才会发生动态绑定</font></li>
+<li><font color="red">在重写继承来的虚函数时，如果函数有默认形参值，不要重新定义不同的值。</font>原因是：虽然虚函数是动态绑定的，但默认形参值是静态绑定的。通过一个指向派生类的基类指针，可以访问到派生类的虚函数，但默认形参值只能来自基类的定义</li>
+<li>[虚析构函数]：析构函数设置为虚函数后，在使用指针引用时会实现动态绑定，实现运行时的多态，保证使用基类类型的指针就可以调用适当的析构函数针对不同的对象进行清理工作</li>
+<li>[纯虚函数的形式]：<pre><code>vitual 函数类型 函数名 (参数表) = 0；</code></pre></li>
+<li><font color="red">声明为纯虚函数之后，基类中就可以不再给出函数的实现部分</font>，纯虚函数的函数体由派生类给出。</li>
+<li>[抽象类]：带有纯虚函数的类是抽象类。/抽象类不能实例化。<br>##2.纯虚函数的应用<br><pre><code>/<em>8-6</em>//<em>虚函数，求圆和长方形的面积及周长</em>/<br>#include<iostream><br>using namespace std;<br>#define pi 3.14</iostream></code></pre></li>
+</ul>
+<p>class Shape {<br>public:<br>    virtual float getArea() = 0;   //纯虚函数<br>    virtual float getPerim() = 0;   //纯虚函数<br>};</p>
+<p>class Circle :public Shape {<br>private:<br>    float r;<br>public:<br>    Circle(float r) { this-&gt;r = r; }<br>    float getArea() {<br>        return (float)pi <em> r </em> r;<br>    }<br>    float getPerim() {<br>        return (float)pi <em> 2 </em> r;<br>    }<br>    void show() {<br>        cout &lt;&lt; “Circle:” &lt;&lt; endl;<br>        cout &lt;&lt; “r=” &lt;&lt; r &lt;&lt; endl;<br>    }<br>};</p>
+<p>class Rectangle :public Shape {<br>private:<br>    float width, height;<br>public:<br>    Rectangle(float w, float h) {<br>        width = w;<br>        height = h;<br>    }<br>    float getArea() {<br>        return width <em> height;<br>    }<br>    float getPerim() {<br>        return 2 </em> (width + height);<br>    }<br>    void show() {<br>        cout &lt;&lt; “Rectangle:” &lt;&lt; endl;<br>        cout &lt;&lt; “w=” &lt;&lt; width &lt;&lt; “ h=” &lt;&lt; height &lt;&lt; endl;<br>    }<br>};</p>
+<p>int main() {<br>    Circle circle(2);<br>    Rectangle rectangle(3, 4);</p>
+<pre><code>circle.show();
+cout &lt;&lt; &quot;area = &quot; &lt;&lt; circle.getArea() 
+    &lt;&lt; &quot;  perim = &quot; &lt;&lt; circle.getPerim() &lt;&lt; endl &lt;&lt; endl;
+rectangle.show();
+cout &lt;&lt; &quot;area = &quot; &lt;&lt; rectangle.getArea()
+    &lt;&lt; &quot;  perim = &quot; &lt;&lt; rectangle.getPerim() &lt;&lt; endl &lt;&lt; endl;
+return 0;
+</code></pre><p>}</p>
+<p>###运行截图：</p>
+<p>##3.有无虚函数的区别</p>
+<p><pre><code>#include<iostream><br>using namespace std;</iostream></code></pre></p>
+<p>class BaseClass {<br>public:<br>    virtual void fun1() { cout &lt;&lt; “BaseClass.fun1” &lt;&lt; endl; }<br>    void fun2() { cout &lt;&lt; “BaseClass.fun2” &lt;&lt; endl; }<br>};</p>
+<p>class Derived :public BaseClass {<br>public:<br>    void fun1() { cout &lt;&lt; “Derived.fun1” &lt;&lt; endl; }<br>    void fun2() { cout &lt;&lt; “Derived.fun2” &lt;&lt; endl; }<br>};</p>
+<p>int main() {<br>    Derived d;<br>    Derived<em> derived = &d;<br>    BaseClass</em> base = &d;<br>    cout &lt;&lt; “通过base指针调用:” &lt;&lt; endl;<br>    base-&gt;fun1();  base-&gt;fun2();<br>    cout &lt;&lt;endl&lt;&lt; “通过derived指针调用:” &lt;&lt; endl;<br>    derived-&gt;fun1();  derived-&gt;fun2();<br>    return 0;<br>}</p>
+<p>###运行截图：</p>
+<p>#四、课后8-11题目解析</p>
+<p>##题目描述<br>在此前基础上，通过继承Rectangle类得到Square。在Shape中增加一个函数int getVertexCount() const用来获得当前顶点的个数，并使用以下几个方法</p>
+<p>##（1）使用dynamic_cast实现Shape::getVertexCount函数</p>
+<p><pre><code>#include<iostream><br>using namespace std;</iostream></code></pre></p>
+<p>#define pi 3.14<br>class Shape {<br>public:<br>    virtual float getArea() = 0;<br>    virtual float getPerim() = 0;<br>    virtual int getVertexCount(Shape *s)const;<br>};</p>
+<p>class Circle :public Shape {<br>private:<br>    float r;<br>public:<br>    int VertexCount = 0;<br>    Circle(float r) { this-&gt;r = r; }<br>    float getArea() {<br>        return (float)pi <em> r </em> r;<br>    }<br>    float getPerim() {<br>        return (float)pi <em> 2 </em> r;<br>    }<br>    void show() {<br>        cout &lt;&lt; “Circle:” &lt;&lt; endl;<br>        cout &lt;&lt; “r=” &lt;&lt; r &lt;&lt; endl;<br>    }<br>};</p>
+<p>class Rectangle :public Shape {<br>private:<br>    float width, height;<br>public:<br>    int VertexCount = 4;<br>    Rectangle(float w, float h) {<br>        width = w;<br>        height = h;<br>    }<br>    float getArea() {<br>        return width <em> height;<br>    }<br>    float getPerim() {<br>        return 2 </em> (width + height);<br>    }<br>    void show() {<br>        cout &lt;&lt; “Rectangle:” &lt;&lt; endl;<br>        cout &lt;&lt; “w=” &lt;&lt; width &lt;&lt; “ h=” &lt;&lt; height &lt;&lt; endl;<br>    }<br>};</p>
+<p>class Square :public Rectangle {<br>public:<br>    int VertexCount = 4;<br>    Square(float len) :Rectangle(len, len) { length = len; }<br>    float getArea() {<br>        return length <em> length;<br>        }<br>    float getPerim() {<br>        return 4 </em> length;<br>    }<br>    void show() {<br>        cout &lt;&lt; “Square:” &lt;&lt; endl;<br>        cout &lt;&lt; “length=” &lt;&lt; length &lt;&lt; endl;<br>    }<br>private:<br>    float length;<br>};</p>
+<p>//使用dynamic_cast的方式实现求顶点函数<br>int Shape::getVertexCount(Shape <em>s)const {<br>    Rectangle </em>r=dynamic_cast&lt;Rectangle<em>&gt;(s);<br>    Circle</em> c = dynamic_cast&lt;Circle<em>&gt;(s);<br>    Square</em> sq = dynamic_cast&lt;Square*&gt;(s);</p>
+<pre><code>if (r)    //如果可以转换
+    return  r-&gt;VertexCount;
+if (c)
+    return c-&gt;VertexCount ;
+if (sq)
+    return sq-&gt;VertexCount;    
+</code></pre><p>}</p>
+<p>int main() {<br>    Circle circle(2);<br>    Rectangle rectangle(3, 4);<br>    Square square(5);</p>
+<pre><code>circle.show();    //圆
+cout &lt;&lt; &quot;area = &quot; &lt;&lt; circle.getArea() 
+    &lt;&lt; &quot;  perim = &quot; &lt;&lt; circle.getPerim() &lt;&lt; endl ;
+cout&lt;&lt;&quot;顶点个数：&quot;&lt;&lt;circle.getVertexCount(&amp;circle)&lt;&lt; endl&lt;&lt;endl;
+
+rectangle.show();   //长方形
+cout &lt;&lt; &quot;area = &quot; &lt;&lt; rectangle.getArea()
+    &lt;&lt; &quot;  perim = &quot; &lt;&lt; rectangle.getPerim() &lt;&lt; endl;
+cout &lt;&lt;&quot;顶点个数&quot;&lt;&lt; rectangle.getVertexCount(&amp;rectangle) &lt;&lt; endl&lt;&lt;endl;
+
+square.show();   //正方形
+cout &lt;&lt; &quot;area = &quot; &lt;&lt; square.getArea()
+    &lt;&lt; &quot;  perim = &quot; &lt;&lt; square.getPerim() &lt;&lt; endl;
+cout &lt;&lt; &quot;顶点个数&quot; &lt;&lt; square.getVertexCount(&amp;square) &lt;&lt; endl;
+return 0;
+</code></pre><p>}</p>
+<p>##（2）使用typeid实现Shape::getVertexCount函数</p>
+<p><pre><code>#include<iostream></iostream></code></pre></p>
+<p>#include<cstring></cstring></p>
+<p>#include<typeinfo><br>using namespace std;</typeinfo></p>
+<p>#define pi 3.14<br>class Shape {<br>public:<br>    virtual float getArea() = 0;<br>    virtual float getPerim() = 0;<br>     int getVertexCount(Shape&amp;s)const;<br>};</p>
+<p>class Circle :public Shape {<br>private:<br>    float r;<br>public:</p>
+<pre><code>Circle(float r) { this-&gt;r = r; }
+float getArea() {
+    return (float)pi * r * r;
+}
+float getPerim() {
+    return (float)pi * 2 * r;
+}
+void show() {
+    cout &lt;&lt; &quot;Circle:&quot; &lt;&lt; endl;
+    cout &lt;&lt; &quot;r=&quot; &lt;&lt; r &lt;&lt; endl;
+}
+</code></pre><p>};</p>
+<p>class Rectangle :public Shape {<br>private:<br>    float width, height;<br>public:</p>
+<pre><code>Rectangle(float w, float h) {
+    width = w;
+    height = h;
+}
+float getArea() {
+    return width * height;
+}
+float getPerim() {
+    return 2 * (width + height);
+}
+void show() {
+    cout &lt;&lt; &quot;Rectangle:&quot; &lt;&lt; endl;
+    cout &lt;&lt; &quot;w=&quot; &lt;&lt; width &lt;&lt; &quot; h=&quot; &lt;&lt; height &lt;&lt; endl;
+}
+</code></pre><p>};</p>
+<p>class Square :public Rectangle {<br>public:<br>    Square(float len) :Rectangle(len, len) { length = len; }<br>    float getArea() {<br>        return length <em> length;<br>    }<br>    float getPerim() {<br>        return 4 </em> length;<br>    }<br>    void show() {<br>        cout &lt;&lt; “Square:” &lt;&lt; endl;<br>        cout &lt;&lt; “length=” &lt;&lt; length &lt;&lt; endl;<br>    }<br>private:<br>    float length;<br>};</p>
+<p>int Shape::getVertexCount(Shape&amp; s)const {<br>    if (!strcmp(typeid(s).name(), “class Circle”))return 0;<br>    else if (!strcmp(typeid(s).name(), “class Rectangle”) || !strcmp(typeid(s).name(), “class Square”))return 4;<br>    else return 1;<br>}</p>
+<p>int main() {<br>    Circle circle(2);<br>    Rectangle rectangle(3, 4);<br>    Square square(5);</p>
+<pre><code>circle.show();    //圆
+cout &lt;&lt; &quot;area = &quot; &lt;&lt; circle.getArea()
+    &lt;&lt; &quot;  perim = &quot; &lt;&lt; circle.getPerim() &lt;&lt; endl;
+cout &lt;&lt; &quot;顶点个数：&quot; &lt;&lt; circle.getVertexCount(circle) &lt;&lt; endl &lt;&lt; endl;
+
+rectangle.show();   //长方形
+cout &lt;&lt; &quot;area = &quot; &lt;&lt; rectangle.getArea()
+    &lt;&lt; &quot;  perim = &quot; &lt;&lt; rectangle.getPerim() &lt;&lt; endl;
+cout &lt;&lt; &quot;顶点个数&quot; &lt;&lt; rectangle.getVertexCount(rectangle) &lt;&lt; endl &lt;&lt; endl;
+
+square.show();   //正方形
+cout &lt;&lt; &quot;area = &quot; &lt;&lt; square.getArea()
+    &lt;&lt; &quot;  perim = &quot; &lt;&lt; square.getPerim() &lt;&lt; endl;
+cout &lt;&lt; &quot;顶点个数&quot; &lt;&lt; square.getVertexCount(square) &lt;&lt; endl;
+return 0;
+</code></pre><p>}</p>
+<p>##（3）将Shape::getVertexCount函数声明为虚函数，在派生类中给出具体实现</p>
+<p><pre><code>#include<iostream><br>using namespace std;</iostream></code></pre></p>
+<p>#define pi 3.14<br>class Shape {<br>public:<br>    virtual float getArea() = 0;<br>    virtual float getPerim() = 0;<br>    virtual int getVertexCount(Shape* s)const = 0;<br>};</p>
+<p>class Circle :public Shape {<br>private:<br>    float r;<br>public:<br>    int VertexCount = 0;<br>    Circle(float r) { this-&gt;r = r; }<br>    float getArea() {<br>        return (float)pi <em> r </em> r;<br>    }<br>    float getPerim() {<br>        return (float)pi <em> 2 </em> r;<br>    }<br>    void show() {<br>        cout &lt;&lt; “Circle:” &lt;&lt; endl;<br>        cout &lt;&lt; “r=” &lt;&lt; r &lt;&lt; endl;<br>    }<br>    int getVertexCount(Shape<em> s)const {<br>        return VertexCount;<br>    }<br>};<br>class Rectangle :public Shape {<br>private:<br>    float width, height;<br>public:<br>    int VertexCount = 4;<br>    Rectangle(float w, float h) {<br>        width = w;<br>        height = h;<br>    }<br>    float getArea() {<br>        return width </em> height;<br>    }<br>    float getPerim() {<br>        return 2 <em> (width + height);<br>    }<br>    void show() {<br>        cout &lt;&lt; “Rectangle:” &lt;&lt; endl;<br>        cout &lt;&lt; “w=” &lt;&lt; width &lt;&lt; “ h=” &lt;&lt; height &lt;&lt; endl;<br>    }<br>    int getVertexCount(Shape</em> s)const {<br>        return VertexCount;<br>    }<br>};</p>
+<p>class Square :public Rectangle {<br>public:<br>    int VertexCount = 4;<br>    Square(float len) :Rectangle(len, len) { length = len; }<br>    float getArea() {<br>        return length <em> length;<br>    }<br>    float getPerim() {<br>        return 4 </em> length;<br>    }<br>    void show() {<br>        cout &lt;&lt; “Square:” &lt;&lt; endl;<br>        cout &lt;&lt; “length=” &lt;&lt; length &lt;&lt; endl;<br>    }<br>    int getVertexCount(Shape* s)const {<br>        return VertexCount;<br>    }<br>private:<br>    float length;<br>};</p>
+<p>int main() {<br>    Circle circle(2);<br>    Rectangle rectangle(3, 4);<br>    Square square(5);</p>
+<pre><code>circle.show();    //圆
+cout &lt;&lt; &quot;area = &quot; &lt;&lt; circle.getArea()
+    &lt;&lt; &quot;  perim = &quot; &lt;&lt; circle.getPerim() &lt;&lt; endl;
+cout &lt;&lt; &quot;顶点个数：&quot; &lt;&lt; circle.getVertexCount(&amp;circle) &lt;&lt; endl &lt;&lt; endl;
+
+rectangle.show();   //长方形
+cout &lt;&lt; &quot;area = &quot; &lt;&lt; rectangle.getArea()
+    &lt;&lt; &quot;  perim = &quot; &lt;&lt; rectangle.getPerim() &lt;&lt; endl;
+cout &lt;&lt; &quot;顶点个数&quot; &lt;&lt; rectangle.getVertexCount(&amp;rectangle) &lt;&lt; endl &lt;&lt; endl;
+
+square.show();   //正方形
+cout &lt;&lt; &quot;area = &quot; &lt;&lt; square.getArea()
+    &lt;&lt; &quot;  perim = &quot; &lt;&lt; square.getPerim() &lt;&lt; endl;
+cout &lt;&lt; &quot;顶点个数&quot; &lt;&lt; square.getVertexCount(&amp;square) &lt;&lt; endl;
+return 0;
+</code></pre><p>}<br></p>
+<p>##运行截图</p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/img/custom/donate/AliPayQR.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/img/custom/donate/WeChanQR.jpg"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2019/11/29/第三章笔记-函数/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                第三章总结：函数</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2019/11/29/第七章笔记-继承与派生/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://static.2heng.xin/wp-content/uploads//2019/02/wallhaven-672007-1-1024x576.png">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                第七章总结：继承与派生</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "ncNSiKFtNPOPE1WpD0W6lT6n-gzGzoHsz",
+        appKey: "JyFaNO8s1XJLTcJovqoS3yDI",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="Meredith923" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author">Meredith923</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 苒耀晨<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
+      </div>
+      <p style="color: #666666;">&copy 2018</p>
+    </div>
+    <div class="footer-device">
+    <p style="font-family: 'Ubuntu', sans-serif;">
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo, Hosted by Coding Pages</a>
+        </span>
+      </p>
+    </div>
+  </div><!-- .site-info -->
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+<script src="/js/botui.js"></script>
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+} else {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/honjun/hojun@1.2","name":"Unbroken.mp4","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+}
+/* ]]> */
+
+</script>
+<script>
+$(document).ready(function() {
+  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    if ($(".pattern-center").length > 0) { //有图的情况
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+      });
+    } else {
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+      });
+    }
+    var offsetTop = $('.toc').offset().top - 95;
+    window.onscroll = function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop >= offsetTop) {
+        $('.toc').addClass('toc-fixed');
+      } else {
+        $('.toc').removeClass('toc-fixed');
+      }
+    }
+  }
+});
+</script>
+
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://cdn.jsdelivr.net/gh/Meredith923/img@2.0/2-1.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">苒耀晨Meredith923</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="http://github.com/Meredith923" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://weibo.com/u/5222023671" class="fa fa-weibo" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/技术/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/生活/">
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  生活
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/资源/">
+                  <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                  资源
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/随想/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/转载/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/tags/悦读/">
+                  <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                  书单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/bangumi/">
+                  <i class="fa fa-film faa-vertical" aria-hidden="true"></i>
+                  片单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/图集/">
+                  <i class="fa fa-photo" aria-hidden="true"></i>
+                  图集
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+            关于
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/about/">
+                  <i class="fa fa-meetup" aria-hidden="true"></i>
+                  我？
+                </a>
+              </li>
+            
+              <li>
+                <a href="/theme-sakura/">
+                  <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                  主题
+                </a>
+              </li>
+            
+              <li>
+                <a href="/lab/">
+                  <i class="fa fa-cogs" aria-hidden="true"></i>
+                  Lab
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="2660651585"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="false"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>

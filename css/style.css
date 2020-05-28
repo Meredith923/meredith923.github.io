@@ -2873,10 +2873,11 @@ h3#comments-list-title {
     margin-right:auto
 }
 .entry-content a img.alignleft,.entry-content a img.alignright,.entry-content a img.aligncenter {
-    cursor:-webkit-zoom-in
+    cursor:-webkit-zoom-in;
+
 }
 #baguetteBox-overlay .full-image {
-    cursor:-webkit-zoom-out
+    cursor:-webkit-zoom-out;
 }
 #baguetteBox-overlay .full-image img,#baguetteBox-overlay .full-image figcaption {
     cursor:auto
